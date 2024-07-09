@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""
-Route module for the API
-"""
+""" Authentication """
 from os import getenv
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
@@ -16,9 +14,39 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 @app.errorhandler(404)
 def not_found(error) -> str:
-    """ Not found handler
+    """Not found handler.
+
+    This function is used as an error handler for 404 errors.
+    It returns a JSON response
+    with an error message indicating that the requested resource was not found.
+
+    Args:
+        error: The error object representing the 404 error.
+
+    Returns:
+        A JSON response with an error message and a status
+        code of 404.
+
     """
     return jsonify({"error": "Not found"}), 404
+
+
+@app.errorhandler(404)
+def not_found(error) -> str:
+
+    return jsonify({"error": "Not found"}), 404
+
+
+@app.errorhandler(401)
+def unauthorized(error) -> str:
+
+    return jsonify({"error": "Unauthorized"}), 401
+
+
+@app.errorhandler(403)
+def forbidden(error) -> str:
+
+    return jsonify({"error": "Forbidden"}), 403
 
 
 if __name__ == "__main__":
