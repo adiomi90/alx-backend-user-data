@@ -14,38 +14,19 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 @app.errorhandler(404)
 def not_found(error) -> str:
-    """Not found handler.
-
-    This function is used as an error handler for 404 errors.
-    It returns a JSON response
-    with an error message indicating that the requested resource was not found.
-
-    Args:
-        error: The error object representing the 404 error.
-
-    Returns:
-        A JSON response with an error message and a status
-        code of 404.
-
-    """
-    return jsonify({"error": "Not found"}), 404
-
-
-@app.errorhandler(404)
-def not_found(error) -> str:
-
+    """Handler for 404 Not Found errors"""
     return jsonify({"error": "Not found"}), 404
 
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-
+    """Handler for 401 Unauthorized errors"""
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
-
+    """Handler for 403 Forbidden errors"""
     return jsonify({"error": "Forbidden"}), 403
 
 
