@@ -16,7 +16,6 @@ class SessionExpAuth(SessionAuth):
     Definition of class SessionExpAuth that adds an
     expiration date to a Session ID
     """
-
     def __init__(self):
         """
         Initialize the class
@@ -32,8 +31,6 @@ class SessionExpAuth(SessionAuth):
         Create a Session ID for a user_id
         Args:
             user_id (str): user id
-        Returns:
-            str: Session ID if successful, None otherwise
         """
         session_id = super().create_session(user_id)
         if session_id is None:
@@ -50,8 +47,8 @@ class SessionExpAuth(SessionAuth):
         Returns a user ID based on a session ID
         Args:
             session_id (str): session ID
-        Returns:
-            str: User ID if session ID is valid and not expired, None otherwise
+        Return:
+            user id or None if session_id is None or not a string
         """
         if session_id is None:
             return None

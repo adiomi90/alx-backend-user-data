@@ -11,36 +11,7 @@ from models.user import User
 
 class BasicAuth(Auth):
     """ Implement Basic Authorization protocol methods
-
-    This class provides methods to handle Basic Authorization protocol.
-    It includes methods to extract and decode the Base64 part of the
-    Authorization header, extract user credentials from the decoded value,
-    and retrieve a User instance based on the extracted credentials.
-
-    Attributes:
-        None
-
-    Methods:
-        extract_base64_authorization_header(authorization_header: str) -> str:
-            Extracts the Base64 part of the Authorization header for a Basic
-            Authorization.
-
-        decode_base64_authorization_header(base64_authorization_header: str)
-        -> str:
-            Decode a Base64-encoded string.
-
-        extract_user_credentials(decoded_base64_authorization_header: str)
-        -> (str, str):
-            Returns user email and password from Base64 decoded value.
-
-        user_object_from_credentials(user_email: str, user_pwd: str)
-        -> TypeVar('User'):
-            Return a User instance based on email and password.
-
-        current_user(request=None) -> TypeVar('User'):
-            Returns a User instance based on a received request.
     """
-
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
         """

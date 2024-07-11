@@ -14,7 +14,6 @@ class Auth:
     """
     Manages the API authentication
     """
-
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Determines whether a given path requires authentication or not
@@ -45,10 +44,6 @@ class Auth:
     def authorization_header(self, request=None) -> str:
         """
         Returns the authorization header from a request object
-        Args:
-            - request: Flask request object (default: None)
-        Return:
-            - The value of the 'Authorization' header if present, else None
         """
         if request is None:
             return None
@@ -60,10 +55,6 @@ class Auth:
     def current_user(self, request=None) -> TypeVar('User'):
         """
         Returns a User instance from information from a request object
-        Args:
-            - request: Flask request object (default: None)
-        Return:
-            - An instance of the User class representing the current user
         """
         return None
 
@@ -71,9 +62,9 @@ class Auth:
         """
         Returns a cookie from a request
         Args:
-            - request: Flask request object (default: None)
+            request : request object
         Return:
-            - The value of the '_my_session_id' cookie from the request object
+            value of _my_session_id cookie from request object
         """
         if request is None:
             return None

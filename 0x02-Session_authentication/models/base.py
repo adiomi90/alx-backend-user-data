@@ -14,28 +14,6 @@ DATA = {}
 
 class Base():
     """ Base class
-
-    This class serves as the base class for all other classes in the project.
-    It provides common functionality for object serialization, file operations,
-    and object management.
-
-    Attributes:
-        id (str): The unique identifier for the object.
-        created_at (datetime): The timestamp when the object was created.
-        updated_at (datetime): The timestamp when the object was last updated.
-
-    Methods:
-        __init__: Initializes a Base instance.
-        __eq__: Checks if two Base instances are equal.
-        to_json: Converts the object to a JSON dictionary.
-        load_from_file: Loads all objects from file.
-        save_to_file: Saves all objects to file.
-        save: Saves the current object.
-        remove: Removes the object.
-        count: Counts all objects.
-        all: Returns all objects.
-        get: Returns one object by ID.
-        search: Searches for objects with matching attributes.
     """
 
     def __init__(self, *args: list, **kwargs: dict):

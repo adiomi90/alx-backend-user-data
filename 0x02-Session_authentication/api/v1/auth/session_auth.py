@@ -13,7 +13,6 @@ from models.user import User
 class SessionAuth(Auth):
     """ Implement Session Authorization protocol methods
     """
-
     user_id_by_session_id = {}
 
     def create_session(self, user_id: str = None) -> str:

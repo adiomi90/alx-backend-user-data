@@ -11,17 +11,8 @@ from models.user import User
 def auth_session():
     """
     Handle user login
-
-    This function handles the login process for users using session authentication.
-    It expects the email and password to be provided in the request form data.
-    If the email or password is missing, it returns an error message.
-    If the email is not associated with any user, it returns an error message.
-    If the password is incorrect, it returns an error message.
-    If the login is successful, it creates a session for the user and returns the user's information.
-
-    Returns:
-        A dictionary representation of the user if found, else an error message.
-
+    Return:
+        dictionary representation of user if found else error message
     """
     email = request.form.get('email')
     password = request.form.get('password')
@@ -48,13 +39,6 @@ def auth_session():
 def handle_logout():
     """
     Handle user logout
-
-    This function handles the logout process for users using session authentication.
-    It destroys the session associated with the current request.
-
-    Returns:
-        An empty JSON response if the session is successfully destroyed, else a 404 error.
-
     """
     from api.v1.app import auth
     if auth.destroy_session(request):
