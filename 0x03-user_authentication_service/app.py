@@ -1,24 +1,5 @@
 #!/usr/bin/env python3
-"""
-Flask app for user authentication.
-
-This app provides endpoints for user registration,
-login, logout, profile retrieval,
-password reset token generation, and password update.
-
-Endpoints:
-- GET /: Returns a JSON response with a welcome message.
-- POST /users: Registers a new user with the provided emailand password.
-- POST /sessions: Logs in a user with the provided email and password.
-- DELETE /sessions: Logs out the currently logged-in user.
-- GET /profile: Retrieves the profile of the currently logged-in user.
-- POST /reset_password: Generates a reset password token for the
-provided email.
-- PUT /reset_password: Updates the password for the provided email
-using the reset token.
-
-"""
-
+""" Main file for the API module for the user authentication service. """   
 from flask import (
     Flask,
     request,
@@ -37,15 +18,16 @@ AUTH = Auth()
 @app.route("/", methods=["GET"], strict_slashes=False)
 def index() -> str:
     """
-    Return json respomse
-    {"message": "Bienvenue"}
+    Default route that returns a welcome message.
     """
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
 def users() -> str:
-
+    """
+    Register new users.
+    """
     email = request.form.get("email")
     password = request.form.get("password")
     try:
@@ -59,10 +41,7 @@ def users() -> str:
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
 def login() -> str:
     """
-    Logs in a user by validating the provided email and password.
-
-    Returns:
-        str: A JSON response containing the user's email and a success message.
+    Log in a user if the credentials provided are correct, and create a new session for them.
     """
     email = request.form.get("email")
     password = request.form.get("password")
@@ -79,15 +58,7 @@ def login() -> str:
 @app.route("/sessions", methods=["DELETE"], strict_slashes=False)
 def logout():
     """
-    Logs out the user by destroying the session and redirecting
-    to the homepage.
-
-    Returns:
-        A redirect response to the homepage.
-
-    Raises:
-        HTTPException: If the user is not authenticated or the
-        session ID is missing.
+    Log out a logged in user and destroy their session.
     """
     session_id = request.cookies.get("session_id", None)
     user = AUTH.get_user_from_session_id(session_id)
@@ -100,11 +71,7 @@ def logout():
 @app.route("/profile", methods=["GET"], strict_slashes=False)
 def profile() -> str:
     """
-    Retrieves the user's profile information.
-
-    Returns:
-        A JSON response containing the user's email if the user
-        is authenticated. Otherwise, returns a 403 Forbidden error.
+    Return a user's email based on session_id in the received cookies.
     """
     session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
@@ -116,13 +83,7 @@ def profile() -> str:
 @app.route("/reset_password", methods=["POST"], strict_slashes=False)
 def get_reset_password_token() -> str:
     """
-    Retrieves the reset password token for a given email address.
-
-    Returns:
-        str: The reset password token.
-
-    Raises:
-        HTTPException: If the email address is not valid.
+    Generate a token for resetting a user's password.
     """
     email = request.form.get("email")
     try:
@@ -136,16 +97,7 @@ def get_reset_password_token() -> str:
 @app.route("/reset_password", methods=["PUT"], strict_slashes=False)
 def update_password() -> str:
     """
-    Update the password for a user.
-
-    Retrieves the email, reset token, and new password from the request form.
-    Calls the `update_password` method of the `AUTH` object to update the
-    password. If the reset token is invalid, raises a `ValueError` and returns
-    a 403 error response.
-    Returns a JSON response with the updated email and a success message.
-
-    Returns:
-        str: JSON response with the updated email and a success message.
+    Update a user's password.
     """
     email = request.form.get("email")
     reset_token = request.form.get("reset_token")
