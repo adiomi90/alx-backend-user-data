@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Main file for the API module for the user authentication service. """   
+""" Main file for the API module for the user authentication service. """
 from flask import (
     Flask,
     request,
@@ -41,7 +41,8 @@ def users() -> str:
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
 def login() -> str:
     """
-    Log in a user if the credentials provided are correct, and create a new session for them.
+    Log in a user if the credentials provided are correct,
+    and create a new session for them.
     """
     email = request.form.get("email")
     password = request.form.get("password")
