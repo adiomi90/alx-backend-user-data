@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+""" Auth module for the user authentication service. """
 import bcrypt
 from uuid import uuid4
 from sqlalchemy.orm.exc import NoResultFound
