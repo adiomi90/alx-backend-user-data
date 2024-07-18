@@ -75,7 +75,8 @@ class DB:
             **kwargs: Keyword arguments representing the attributes to update.
 
         Raises:
-            ValueError: If the user with the given ID is not found or if an invalid attribute is provided.
+            ValueError: If the user with the given ID is not found or if an
+            invalid attribute is provided.
         """
         try:
             usr = self.find_user_by(id=user_id)
